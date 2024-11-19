@@ -16,7 +16,7 @@
                         <p>{{ $post->snippet }}</p>
                         <p class="text-neutral-content">{{$post->created_at->diffForHumans()}}</p>
                         <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Buy Now</button>
+                            <a class="btn btn-primary" href="">Read more</a>
                         </div>
                     </div>
                 </div>
