@@ -11,4 +11,8 @@ class PublicController extends Controller
         $posts = Post::latest()->simplePaginate(16);
         return view('welcome', compact('posts'));
     }
+
+    public function secure(){
+        return 'Secure';
+    }
 }
