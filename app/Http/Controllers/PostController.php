@@ -30,6 +30,10 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+
+        move_uploaded_file($_FILES['image']['tmp_name'], storage_path('app/public/') . $_FILES['image']['name']);
+        dd($_POST, $_FILES);
+
         $post = new Post($request->validated());
         // $post->title = $request->input('title');
         // $post->body = $request->input('body');
@@ -50,7 +54,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -58,7 +62,10 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        // $post->title = $request->input('title');
+        // $post->body = $request->input('body');
+        $post->update($request->validated());
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -66,6 +73,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('posts.index');
     }
 }
