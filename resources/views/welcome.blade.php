@@ -8,9 +8,9 @@
         <div class="grid grid-cols-4 gap-4">
             @foreach ($posts as $post)
                 <div class="card bg-base-300 shadow-xl">
-                    @if($post->image)
+                    @if($post->displayImage)
                         <figure>
-                            <img src="{{$post->image}}" alt="Shoes" />
+                            <img src="{{$post->displayImage}}" alt="Shoes" />
                         </figure>
                     @endif
                     <div class="card-body">

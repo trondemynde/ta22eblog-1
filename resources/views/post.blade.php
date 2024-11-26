@@ -3,9 +3,9 @@
 @section('content')
     <div class="container mx-auto">
         <div class="card bg-base-300 shadow-xl">
-            @if ($post->image)
+            @if ($post->displayImage)
                 <figure>
-                    <img src="{{ $post->image }}" alt="Shoes" />
+                    <img src="{{ $post->displayImage }}" alt="Shoes" />
                 </figure>
             @endif
             <div class="card-body">
