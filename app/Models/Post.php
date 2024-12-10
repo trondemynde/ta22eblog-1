@@ -13,6 +13,8 @@ class Post extends Model
 
     protected $fillable = ['title', 'body'];
 
+    protected $withCount = ['comments', 'likes'];
+
     // public function getSnippetAttribute()
     // {
     //     return explode("\n\n", $this->body)[0];
@@ -39,6 +41,10 @@ class Post extends Model
 
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 
 
