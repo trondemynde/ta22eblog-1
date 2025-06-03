@@ -8,7 +8,7 @@ services:
     volumes:
       - ta22edbdata:/var/lib/mysql
     ports:
-      - 3306:3306
+      - 3307:3307
   mailhog:
     image: mailhog/mailhog
     ports:
