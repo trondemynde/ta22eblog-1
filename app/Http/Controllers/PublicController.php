@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PublicController extends Controller
 {
     public function index(){
-        $posts = Post::with('user:id,name')->latest()->simplePaginate(16);
+        $posts = Post::with('user:id,name')->latest()->simplePaginate(3);
         return view('welcome', compact('posts'));
     }
 

@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->paginate();
+        $posts = Post::latest()->paginate(3);
         return view('posts.index', compact('posts'));
     }
 
@@ -32,12 +32,16 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = new Post($request->validated());
-        if($request->has('image')){
-            $post->image = $request->file('image')->store('', ['disk'=>'public']);
+
+        // Associate the post with the authenticated user
+        $post->user_id = auth()->id();
+
+        if($request->has('image')) {
+            $post->image = $request->file('image')->store('', ['disk' => 'public']);
         }
-        // $post->title = $request->input('title');
-        // $post->body = $request->input('body');
+
         $post->save();
+
         return redirect()->route('posts.index');
     }
 
@@ -76,4 +80,5 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index');
     }
+
 }

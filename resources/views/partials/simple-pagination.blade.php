@@ -1,19 +1,27 @@
 @if ($paginator->hasPages())
-    <nav>
-        <ul class="pagination">
+    <nav class="flex justify-center my-4" aria-label="Simple Pagination">
+        <div class="join w-96">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
-                <li class="disabled" aria-disabled="true"><span>@lang('pagination.previous')</span></li>
+                <button class="join-item btn btn-disabled w-52 min-w-0 flex justify-center items-center" aria-disabled="true">
+                    @lang('pagination.previous')
+                </button>
             @else
-                <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev">@lang('pagination.previous')</a></li>
+                <a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="join-item btn w-52 min-w-0 flex justify-center items-center">
+                    @lang('pagination.previous')
+                </a>
             @endif
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
-                <li><a href="{{ $paginator->nextPageUrl() }}" rel="next">@lang('pagination.next')</a></li>
+            <a href="{{ $paginator->nextPageUrl() }}" rel="next" class="join-item btn w-52 min-w-0 flex justify-center items-center">
+            @lang('pagination.next')
+                </a>
             @else
-                <li class="disabled" aria-disabled="true"><span>@lang('pagination.next')</span></li>
+                <button class="join-item btn btn-disabled w-52 min-w-0 flex justify-center items-center" aria-disabled="true">
+                    @lang('pagination.next')
+                </button>
             @endif
-        </ul>
+        </div>
     </nav>
 @endif
