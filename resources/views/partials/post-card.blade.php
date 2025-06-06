@@ -1,27 +1,25 @@
-<div class="card bg-base-100 shadow-xl border border-base-200">
+<div class="card bg-base-300 shadow-xl">
     @if($post->displayImage)
-        <figure class="px-4 pt-4">
-            <img src="{{ $post->displayImage }}" alt="Post image" class="rounded-xl max-h-60 object-cover w-full" />
+        <figure>
+            <img src="{{$post->displayImage}}" alt="Shoes" />
         </figure>
     @endif
     <div class="card-body">
         <h2 class="card-title">{{ $post->title }}</h2>
         @if(isset($full) && $full)
-            <p class="whitespace-pre-line">{!! nl2br($post->body) !!}</p>
+            <p>{!! nl2br($post->body) !!}</p>
         @else
             <p>{{ $post->snippet }}</p>
         @endif
 
-        <div class="flex flex-wrap gap-2 mt-2 text-sm">
-            <span class="badge badge-outline badge-primary">{{ $post->user->name }}</span>
-            <span class="badge badge-outline">💬 {{ $post->comments_count }}</span>
-            <span class="badge badge-outline">👍 {{ $post->likes_count }}</span>
-            <span class="text-xs text-neutral-content ml-auto">{{ $post->created_at->diffForHumans() }}</span>
-        </div>
 
-        <div class="card-actions justify-end mt-4">
+        <p class="text-base-content">{{$post->user->name}}</p>
+        <p class="text-base-content">Comments:{{$post->comments_count}}</p>
+        <p class="text-base-content">Likes:{{$post->likes_count}}</p>
+        <p class="text-neutral-content">{{$post->created_at->diffForHumans()}}</p>
+        <div class="card-actions justify-end">
             @if(!isset($full) || !$full)
-                <a class="btn btn-primary" href="{{ route('post', ['post' => $post]) }}">Read more</a>
+                <a class="btn btn-primary" href="{{ route('post', ['post' => $post])}}">Read more</a>
             @endif
         </div>
     </div>

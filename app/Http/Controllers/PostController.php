@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     /**
@@ -33,8 +34,7 @@ class PostController extends Controller
     {
         $post = new Post($request->validated());
 
-        // Associate the post with the authenticated user
-        $post->user_id = auth()->id();
+        $post->user_id = Auth::user()->id;
 
         if($request->has('image')) {
             $post->image = $request->file('image')->store('', ['disk' => 'public']);
@@ -80,5 +80,4 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index');
     }
-
 }

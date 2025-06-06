@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Comment;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 
+use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
     /**
@@ -19,9 +21,9 @@ class CommentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Post $post)
     {
-        //
+        return view('comments.create', compact('post'));
     }
 
     /**
@@ -29,7 +31,12 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        $comment = new Comment($request->validated());
+        $comment->user_id = Auth::user()->id;
+        $comment->post_id = $request->post;
+        $comment->body = $request->input('body');
+        $comment->save();
+        return redirect()->route('post', $request->post);
     }
 
     /**
